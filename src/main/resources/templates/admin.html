@@ -4,27 +4,48 @@
     <meta charset="UTF-8">
     <title>ADMIN PAGE</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-<div class="row" th:if="${#request.isUserInRole('ADMIN')}">
-    <h2>SUPER USER AUTENTIFICAT.</h2>
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">JOIN</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/"><i class="fa fa-home"></i>Home</a>
+            </li>
+            <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" href="/create">Create Account</a>
+            </li>
+            <li sec:authorize="hasAnyRole('USER', 'ADMIN')" class="nav-item">
+                <a class="nav-link" href="/user">User Page</a>
+            </li>
 
-<div class="row" th:if="${#request.isUserInRole('USER')}">
-    <h2>user normal autentificat</h2>
-</div>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item active">
+                <a class="nav-link" href="/admin">Admin Page <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form th:action="@{/logout}" method="post">
+            <button sec:authorize="isAuthenticated()" type="submit" class="btn btn-danger btn-lg">LOGOUT</button>
+        </form>
+    </div>
+</nav>
+
 <div class="jumbotron text-center text-black">
     <h1>Welcome to Join.</h1>
     <h1>A File Sharing Web Application.</h1>
+    <h2 th:inline="text" sec:authorize="isAuthenticated()" class="navbar-text" style="color:blue">Welcome [[${#httpServletRequest.remoteUser}]]!</h2>
 </div>
 
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! YOU ARE AN ADMIN</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
-
-<h1>SENSITIVE INFORMATION</h1>
+<div class="row justify-content-center">
+    <div class = "col-sm-6 text-center">
+        <h1>ADMIN PAGE WITH SENSITIVE INFORMATION</h1>
+    </div>
+</div>
 
 </body>
 </html>

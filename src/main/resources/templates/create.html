@@ -4,25 +4,38 @@
 <head>
     <title>Create User Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-<div class="row" th:if="${#request.isUserInRole('ADMIN')}">
-    <h2>SUPER USER AUTENTIFICAT.</h2>
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">JOIN</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/"><i class="fa fa-home"></i>Home</a>
+            </li>
 
-<div class="row" th:if="${#request.isUserInRole('USER')}">
-    <h2>user normal autentificat</h2>
-</div>
+            <li class="nav-item active">
+                <a class="nav-link" href="/create">Create Account <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+        </ul>
+        <form th:action="@{/logout}" method="post">
+            <button sec:authorize="isAuthenticated()" type="submit" class="btn btn-danger btn-lg">LOGOUT</button>
+        </form>
+    </div>
+</nav>
+
 <div class="jumbotron text-center text-black">
     <h1>Welcome to Join.</h1>
     <h1>A File Sharing Web Application.</h1>
-
-    <div class="row">
-        <form action="/" method="get">
-            <button id="backButton" type="submit" class="btn btn-success btn-lg" style="float:left">HOME PAGE</button>
-        </form>
-    </div>
 </div>
 
 <div class="row justify-content-center">
@@ -47,48 +60,9 @@
                 <div> <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</label></div>
             </div>
 
-            <button type="submit" class="btn btn-danger">CREATE USER</button>
-
-<!--            <div class="form-group">-->
-<!--                <label>Region</label>-->
-<!--                <input type="password" class="form-control" name="password" placeholder="Enter your password">-->
-<!--            </div>-->
-
-<!--            <div th:if="${param.error}">-->
-<!--                <p id="warnMsg">Invalid username and password. </p>-->
-<!--            </div>-->
-<!--            <div th:if="${param.logout}">-->
-<!--                <p id="successMsg">You have been logged out. </p>-->
-<!--            </div>-->
-<!--            <br>-->
-
-<!--            <button type="submit" class="btn btn-primary" >LOGIN</button>-->
+            <button type="submit" class="btn btn-danger">Create Account</button>
         </form>
     </div>
 </div>
-
-<!--<form action="#" th:action="@{/create}" th:object="${userForm}" method="post">-->
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <td>Username:</td>-->
-<!--            <td><input type="text" th:field="*{username}" /></td>-->
-<!--            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Password:</td>-->
-<!--            <td><input type="password" th:field="*{password}" /></td>-->
-<!--            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Email:</td>-->
-<!--            <td><input type="text" th:field="*{email}" /></td>-->
-<!--            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Password Error</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td><button type="submit">Create User</button></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</form>-->
-
 </body>
 </html>

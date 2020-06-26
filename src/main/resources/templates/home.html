@@ -17,8 +17,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/"><i class="fa fa-home"></i>Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li sec:authorize="isAnonymous()" class="nav-item">
                 <a class="nav-link" href="/create">Create Account</a>
+            </li>
+            <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" href="/login">Log in</a>
             </li>
             <li sec:authorize="hasAnyRole('USER', 'ADMIN')" class="nav-item">
                 <a class="nav-link" href="/user">User Page</a>
@@ -28,9 +31,6 @@
                 <a class="nav-link" href="/admin">Admin Page</a>
             </li>
         </ul>
-        <form action="/login" method="get">
-            <button sec:authorize="isAnonymous()" type="submit" class="btn btn-success btn-lg">LOGIN</button>
-        </form>
 
         <form th:action="@{/logout}" method="post">
             <button sec:authorize="isAuthenticated()" type="submit" class="btn btn-danger btn-lg">LOGOUT</button>
@@ -42,6 +42,13 @@
     <h1>Welcome to Join.</h1>
     <h1>A File Sharing Web Application.</h1>
     <h2 th:inline="text" sec:authorize="isAuthenticated()" class="navbar-text" style="color:blue">Welcome [[${#httpServletRequest.remoteUser}]]!</h2>
+</div>
+
+
+<div class="row justify-content-center">
+    <div class = "col-sm-6 text-center">
+        <h1>BINARY BACKGROUND INCOMING</h1>
+    </div>
 </div>
 
 </body>
