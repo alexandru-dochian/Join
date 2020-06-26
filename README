@@ -2,7 +2,7 @@
 
 Alternative #1 (using Maven)
 
-1) go into the project root path (e.g. "cd ./join")
+1) go into the project root path (e.g. "cd ./Join")
 2) run the maven script (e.g. "./mvnw spring-boot:run")
 3) type "localhost:8080/" in any browser
 
@@ -18,6 +18,9 @@ Alternative #2 (using IntelliJ)
 
 	-> "join" package (base package) in: /src/main/java/join
 		-> holds main class
+		-> holds a @Bean that creates two accounts at startup
+		    -> "admin" with "pass" (with role of "ADMIN")
+		    -> "user" with "pass" (with role of "USER")
 	
 	-> "join.controllers" package in /src/main/java/join/controllers
 		-> holds MVC configuration
@@ -40,5 +43,8 @@ Alternative #2 (using IntelliJ)
 
 @@@ Todo's @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-	-> Update "/user" and "/admin" views
 	-> Add file sharing feature
+
+    -> #BUGS
+        -> "/create" and "/login" API's are accessible by logged in users (even
+        | though view control takes care of it)
