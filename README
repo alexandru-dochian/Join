@@ -1,0 +1,44 @@
+@@@ Run the app @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Alternative #1 (using Maven)
+
+1) go into the project root path (e.g. "cd ./join")
+2) run the maven script (e.g. "./mvnw spring-boot:run")
+3) type "localhost:8080/" in any browser
+
+Alternative #2 (using IntelliJ)
+
+1) import the project folder intro intelliJ
+2) run the main method in /src/main/java/join/JoinApplication.java
+3) type "localhost:8080/" in any browser
+
+@@@ About project architecture @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+	-> Used Maven as a project builder
+
+	-> "join" package (base package) in: /src/main/java/join
+		-> holds main class
+	
+	-> "join.controllers" package in /src/main/java/join/controllers
+		-> holds MVC configuration
+	
+	-> "join.security" package in /src/main/java/join/security
+		-> holds authentication configuration
+		-> holds authorization configuration
+		-> users database configuration
+
+	-> views (html pages) in /src/main/resources/templates
+		-> used thymeleaf to perform view control on content based on 
+		| authorization and authentication logic
+
+@@@ Spring Dependencies @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	-> Spring Web
+	-> Spring Security
+	-> Thymeleaf
+	-> H2 Database
+	-> Spring Data JPA
+
+@@@ Todo's @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+	-> Update "/user" and "/admin" views
+	-> Add file sharing feature

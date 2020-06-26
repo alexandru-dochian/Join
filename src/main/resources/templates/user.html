@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>USER PAGE</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="row" th:if="${#request.isUserInRole('ADMIN')}">
+    <h2>SUPER USER AUTENTIFICAT.</h2>
+</div>
+
+<div class="row" th:if="${#request.isUserInRole('USER')}">
+    <h2>user normal autentificat</h2>
+</div>
+<div class="jumbotron text-center text-black">
+    <h1>Welcome to Join.</h1>
+    <h1>A File Sharing Web Application.</h1>
+</div>
+
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! YOU ARE AN USER</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+
+
+</body>
+</html>
