@@ -1,18 +1,24 @@
 package join.security;
 
-import javax.validation.constraints.NotNull;
+
+import com.sun.istack.NotNull;
+import org.hibernate.validator.constraints.Email;
+
 import javax.validation.constraints.Size;
 
 public class UserForm {
     @NotNull
     @Size(min=3, max=30)
     private String username;
+
     @NotNull
     @Size(min=4, max=30)
     private String password;
 
+
     @NotNull
-    @Size(min=11, max=60)
+    @Size(min=6, max=60)
+    @Email
     private String email;
 
     public String getEmail() {

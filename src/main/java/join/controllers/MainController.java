@@ -19,27 +19,26 @@ public class MainController {
     private static final Logger log = LoggerFactory.getLogger(MainController.class);
 
     @Autowired
-    UserRepository userRepository;
+        UserRepository userRepository;
 
     // helper method
-    public User userFormToUser(UserForm userForm)
-    {
-        return new User(userForm.getUsername(), userForm.getPassword(), userForm.getEmail(), "ROLE_USER");
-    }
+    public User userFormToUser(UserForm userForm) { return new User(userForm.getUsername(), userForm.getPassword(), userForm.getEmail(), "ROLE_USER"); }
 
     @PostMapping("/create")
     public String createUser(@Valid UserForm userForm, BindingResult bindingResult) {
+            System.out.println("sal");
+            if (bindingResult.hasErrors()) { return "create"; }
 
-        if (bindingResult.hasErrors()) {
-            return "create";
-        }
-
-        log.info("User account created: " + userRepository.save(userFormToUser(userForm)));
-        return "redirect:/";
+            log.info("User account created: " + userRepository.save(userFormToUser(userForm)));
+            return "redirect:/";
     }
 
     @GetMapping("/create")
-    public String getCreatePage(UserForm userForm) {
-        return "create";
-    }
+    public String getCreatePage(UserForm userForm) { return "create"; }
+
+    @GetMapping("/")
+    public String getHomePage(UserForm userForm) { return "home"; }
+
+    @GetMapping("/login")
+    public String getLoginPage(UserForm userForm) { return "login"; }
 }

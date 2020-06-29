@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 public class User {
-    private @Id @GeneratedValue long Id;
+    private @Id @GeneratedValue long userId;
     private String username;
     private String password;
     private String email;
@@ -22,12 +22,12 @@ public class User {
 
     public User() {}
 
-    public long getId() {
-        return Id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -65,7 +65,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + Id +
+                "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +

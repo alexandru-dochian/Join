@@ -40,8 +40,27 @@
 
 <div class="row justify-content-center">
     <div class = "col-sm-6 text-center">
-        <form action="#"  th:action="@{/create}" th:object="${userForm}" method="post">
-
+        <form action="#" th:action="@{/create}" th:object="${userForm}" method="post">
+<!--            <table>-->
+<!--                <tr>-->
+<!--                    <td>Username:</td>-->
+<!--                    <td><input type="text" th:field="*{username}" /></td>-->
+<!--                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>Password:</td>-->
+<!--                    <td><input type="password" th:field="*{username}" /></td>-->
+<!--                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>Email:</td>-->
+<!--                    <td><input type="email" th:field="*{email}" /></td>-->
+<!--                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><button type="submit">Submit</button></td>-->
+<!--                </tr>-->
+<!--            </table>-->
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" th:field="*{username}" class="form-control" placeholder="Username">
