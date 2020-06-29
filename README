@@ -48,4 +48,3 @@ Alternative #2 (using IntelliJ)
     -> #BUGS
         -> "/create" and "/login" API's are accessible by logged in users (even
         | though view control takes care of it)
-        -> Check for duplicates when create an account

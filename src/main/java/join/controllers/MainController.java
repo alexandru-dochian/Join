@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +26,15 @@ public class MainController {
     public User userFormToUser(UserForm userForm) { return new User(userForm.getUsername(), userForm.getPassword(), userForm.getEmail(), "ROLE_USER"); }
 
     @PostMapping("/create")
-    public String createUser(@Valid UserForm userForm, BindingResult bindingResult) {
+    public String createUser(@Valid UserForm userForm, BindingResult bindingResult, Model model) {
             System.out.println("sal");
             if (bindingResult.hasErrors()) { return "create"; }
+
+            if (userRepository.findByusername(userForm.getUsername()).isPresent())
+            {
+                model.addAttribute("warnMsg", userForm.getUsername() + " is already recorded!");
+                return "create";
+            }
 
             log.info("User account created: " + userRepository.save(userFormToUser(userForm)));
             return "redirect:/";
