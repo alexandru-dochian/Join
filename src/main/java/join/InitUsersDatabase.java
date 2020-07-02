@@ -2,6 +2,7 @@ package join;
 
 import join.security.User;
 import join.security.UserRepository;
+import join.storage.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -9,12 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class InitUsersDatabase {
+public class InitDatabases {
 
-    private static final Logger log = LoggerFactory.getLogger(InitUsersDatabase.class);
+    private static final Logger log = LoggerFactory.getLogger(InitDatabases.class);
 
     @Bean
-    CommandLineRunner init(UserRepository repository) {
+    CommandLineRunner initUsersDatabase(UserRepository repository) {
 
         return args -> {
             log.info("Creating admin... " +
@@ -23,4 +24,6 @@ public class InitUsersDatabase {
                     repository.save(new User("user", "pass", "user@slave.com", "ROLE_USER")));
         };
     }
+
+
 }
