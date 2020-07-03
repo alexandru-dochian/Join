@@ -30,6 +30,9 @@ Alternative #2 (using IntelliJ)
 		-> holds authorization configuration
 		-> users database configuration
 
+    -> "join.storage" package in /src/main/java/join/storage
+        -> holds storage feature configuration
+
 	-> views (html pages) in /src/main/resources/templates
 		-> used thymeleaf to perform view control on content based on 
 		| authorization and authentication logic
@@ -41,10 +44,43 @@ Alternative #2 (using IntelliJ)
 	-> H2 Database
 	-> Spring Data JPA
 
-@@@ Todo's @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@ Possible Todo's @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-	-> Add file sharing feature
+    -> Security side
+        -> replace HTTP protocol with HTTPS
 
-    -> #BUGS
+        -> at this time the passwords are hold in the database in plain text;
+        | must use hashing;
+
+        -> Build separate API's/endpoints for each user;
+        |   At this time there are only 2 common API's available:
+        |       -> "/user" for all accounts with "USER" and "ADMIN" roles
+        |       -> "/admin" for all accounts with "ADMIN" role
+
+        -> Just found out that Spring Security allows individuals to connect
+        | with the same account credentials from different devices at the same
+        | time. Must take care of this problem internally.
+
         -> "/create" and "/login" API's are accessible by logged in users (even
         | though view control takes care of it)
+
+        -> Mail confirmation when creating an account (SMTP + Spring/java ?)
+
+        -> Using a symmetric key based algorithm for encrypting the users's
+        | files
+
+    -> Storage side
+
+        -> Replace H2 "in-memory" database with an MySql server for providing
+        | persistent storage to the users accounts, to the information about
+        | the files stored locally, or even store the files in the database;
+
+    -> View Side
+
+        -> When a file is downloaded (the download button is being pressed) the
+        | resources is being provided to the user but the page is not refreshed
+        | Possible solution(JS to make the request when this event occurs?)
+
+        -> From a very strange reason, unknown to me at this time i couldn't
+        | link the project to a style.css (in /resources/templates) file.
+        | (Must do it)

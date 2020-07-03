@@ -10,12 +10,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class InitDatabases {
+public class initDatabases {
 
-    private static final Logger log = LoggerFactory.getLogger(InitDatabases.class);
+    private static final Logger log = LoggerFactory.getLogger(initDatabases.class);
 
     @Bean
-    CommandLineRunner initUsersDatabase(UserRepository repository) {
+    CommandLineRunner initStorage(StorageService storageService) {
+        return (args) -> {
+            storageService.deleteAll();
+            storageService.init();
+        };
+    }
+
+    @Bean
+    CommandLineRunner initUsers(UserRepository repository) {
 
         return args -> {
             log.info("Creating admin... " +
@@ -24,6 +32,4 @@ public class InitDatabases {
                     repository.save(new User("user", "pass", "user@slave.com", "ROLE_USER")));
         };
     }
-
-
 }

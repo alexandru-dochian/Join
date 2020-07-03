@@ -1,6 +1,7 @@
 package join;
 
 import join.security.UserRepository;
+import join.storage.FileEntityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,13 @@ public class ScheduledTasks {
     @Autowired
     UserRepository userRepository;
 
-    @Scheduled(fixedRate = 10000)
+    @Autowired
+    FileEntityRepository fileEntityRepository;
+
+    @Scheduled(fixedRate = 5000)
     public void printCurrentUsers()
     {
-        log.info("Current existing accounts..." + userRepository.findAll());
+        log.info("Info about files..." + fileEntityRepository.findAll());
     }
 
 }

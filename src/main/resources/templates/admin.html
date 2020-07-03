@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="/">JOIN</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,8 +42,53 @@
 </div>
 
 <div class="row justify-content-center">
-    <div class = "col-sm-6 text-center">
-        <h1>ADMIN PAGE WITH SENSITIVE INFORMATION</h1>
+
+    <div class="col-sm-8">
+        <h2 style="text-align:center">Uploaded Files</h2>
+        <table class="table" style="text-align:center">
+            <thead class="thead-light">
+            <tr>
+                <th>File Name</th>
+                <th>User who uploaded</th>
+                <th>Number Of Downloads</th>
+                <th>Download link</th>
+                <th>Delete link</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="file : ${files}">
+                <td th:text="${file.fileName}"></td>
+                <td th:text="${file.userWhoUploaded}"></td>
+                <td th:text="${file.nrOfDownloads}"></td>
+                <td> <a th:href="${file.downloadLink}">DOWNLOAD</a></td>
+                <td> <a th:href="${file.deleteLink}">DELETE</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-sm-4">
+        <h2 style="text-align:center">Global Information</h2>
+        <ul class="list-group">
+            <li class="list-group-item ">
+                <h4>Accounts created: </h4>
+                <label th:text="${createdAccounts}"></label>
+            </li>
+            <li class="list-group-item ">
+                <h4>Files currently uploaded on the server</h4>
+                <label th:text="${filesOnTheServer}"></label>
+            </li>
+            <li class="list-group-item ">
+                <h4>Total Downloads: </h4>
+                <label th:text="${totalDownloads}"></label>
+            </li>
+            <li class="list-group-item" style="text-align:center">
+                <form method="get" th:action=@{/admin}>
+                    <button type="submit" class="btn btn-success btn-lg">REFRESH</button>
+                </form>
+            </li>
+        </ul>
     </div>
 </div>
 
